@@ -1,0 +1,8 @@
+# Default rust gitignore
+target/
+Cargo.lock
+Cargo.toml.orig
+*.rs.bk
+*.rs.swp
+*.rs~
+*.rlib
