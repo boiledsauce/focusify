@@ -4,5 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-notify = "8.0.0"
-rand = "0.9.0"
+chrono = "0.4.40"
+serde = "1.0.219"
+tokio = { version = "1.44.1", features = ["full"] }
+tauri = "1.8.2"                                     # or "1.3", "1.2", etc.
