@@ -19,11 +19,13 @@ This application is trying to solve these problems.
 
 ### Prerequisites
 
-TODO
+Rust
 
 ### Installation
 
-TODO
+```
+cargo build from the root folder
+```
 
 ## Usage
 
@@ -39,4 +41,5 @@ TODO
 
 ## License
 
-TODO
+Joseph Plateau License of bubble science ™
+![PlateuLicense](image-1.png)
