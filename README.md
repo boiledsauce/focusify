@@ -7,6 +7,8 @@ Among those, there is certain things that could improve upon.
 
 This application is trying to solve these problems.
 
+![Screenshot of current phase](image.png)
+
 ## Features
 
 - Pomodoro Timer
