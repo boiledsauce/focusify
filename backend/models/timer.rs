@@ -1,12 +1,54 @@
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Deserializer, Serialize, Serializer}; // <-- Important
 use std::time::Duration;
 
-#[derive(Debug, Clone)]
+pub fn serialize_duration<S>(duration: &Duration, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    serializer.serialize_u64(duration.as_secs())
+}
+
+pub fn deserialize_duration<'de, D>(deserializer: D) -> Result<Duration, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let secs = u64::deserialize(deserializer)?; // uses u64::deserialize
+    Ok(Duration::from_secs(secs))
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(tag = "type", content = "value")]
 pub enum TimerState {
+    // This variant has a DateTime<Utc>, which chrono can handle if "serde" is enabled
     Working(DateTime<Utc>),
-    ShortBreak(Duration),
-    LongBreak(Duration),
-    Paused(Duration, Box<TimerState>),
+
+    // For Duration fields, we attach our custom (de)serialize functions
+    ShortBreak(
+        #[serde(
+            serialize_with = "serialize_duration",
+            deserialize_with = "deserialize_duration"
+        )]
+        Duration,
+    ),
+    LongBreak(
+        #[serde(
+            serialize_with = "serialize_duration",
+            deserialize_with = "deserialize_duration"
+        )]
+        Duration,
+    ),
+
+    // Paused has a Duration and another TimerState
+    Paused(
+        #[serde(
+            serialize_with = "serialize_duration",
+            deserialize_with = "deserialize_duration"
+        )]
+        Duration,
+        Box<TimerState>,
+    ),
+
     Idle,
 }
 
@@ -48,9 +90,13 @@ impl Default for PomodoroConfig {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TimerUpdate {
     pub state: TimerState,
+    #[serde(
+        serialize_with = "serialize_duration",
+        deserialize_with = "deserialize_duration"
+    )]
     pub remaining: Duration,
     pub completed_sessions: u32,
     pub total_sessions: u32,

@@ -1,0 +1,13 @@
+# ./backend/Cargo.toml
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "lib.rs" # or just "lib.rs" if it's in this directory
+
+[dependencies]
+chrono = { version = "0.4.40", features = ["serde"] }
+serde = { version = "1.0.219", features = ["derive"] }
+tokio = { version = "1.44.1", features = ["full"] }

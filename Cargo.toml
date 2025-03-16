@@ -1,10 +1,6 @@
-[package]
-name = "focusify"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-chrono = "0.4.40"
-serde = "1.0.219"
-tokio = { version = "1.44.1", features = ["full"] }
-tauri = "1.8.2"                                     # or "1.3", "1.2", etc.
+# ./Cargo.toml (top-level)
+[workspace]
+members = [
+    "backend",   # or "src", if that's where you keep your backend
+    "src-tauri",
+]

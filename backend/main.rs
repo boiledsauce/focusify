@@ -1,9 +1,9 @@
-use focusify::{
-    models::timer::{PomodoroConfig, TimerState, TimerUpdate},
-    services::pomodoro::PomodoroTimer,
-};
 use std::time::Duration;
 use tokio::sync::broadcast::Receiver;
+use {
+    crate::models::timer::{PomodoroConfig, TimerState, TimerUpdate},
+    crate::services::pomodoro::PomodoroTimer,
+};
 
 #[tokio::main]
 async fn main() {
