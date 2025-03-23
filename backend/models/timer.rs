@@ -39,17 +39,16 @@ pub enum TimerState {
         Duration,
     ),
 
-    // Paused has a Duration and another TimerState
-    Paused(
-        #[serde(
-            serialize_with = "serialize_duration",
-            deserialize_with = "deserialize_duration"
-        )]
-        Duration,
-        Box<TimerState>,
-    ),
+    Paused,
+}
 
-    Idle,
+impl TimerState {
+    pub fn is_running(&self) -> bool {
+        match self {
+            TimerState::Paused => false,
+            _ => true,
+        }
+    }
 }
 
 pub struct PomodoroConfig {
