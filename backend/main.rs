@@ -12,7 +12,7 @@ async fn main() {
         work_duration: Duration::new(1500, 0),       // 25 minutes
         short_break_duration: Duration::new(300, 0), // 5 minutes
         long_break_duration: Duration::new(900, 0),  // 15 minutes
-        sessions_before_long_break: 4,
+        sessions_before_long_break: 1,
     };
 
     // Create a PomodoroTimer
@@ -21,10 +21,7 @@ async fn main() {
     // Subscribe to the timer updates
     let mut rx: Receiver<TimerUpdate> = timer.subscribe().await;
 
-    // Start the timer
-    tokio::spawn(async move {
-        timer.start().await;
-    });
+ 
 
     // Print the timer updates
     while let Ok(update) = rx.recv().await {

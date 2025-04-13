@@ -1,0 +1,103 @@
+.pomodoro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent any overflow */
+}
+
+/* Special styling for break periods when maximized */
+.pomodoro-container.break-time {
+  background-color: #3a7ca5;
+  color: white;
+  justify-content: center;
+}
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.time {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.sessions {
+  margin-bottom: 20px;
+}
+
+.break-message {
+  margin-top: 40px;
+  text-align: center;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.break-message h3 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.break-message p {
+  font-size: 1.5rem;
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.start-btn, .stop-btn {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+.start-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.stop-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.start-btn:hover, .stop-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+/* Add global styling to ensure all components fit properly */
+body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}

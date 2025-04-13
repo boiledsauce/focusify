@@ -81,10 +81,10 @@ impl PomodoroConfig {
 impl Default for PomodoroConfig {
     fn default() -> Self {
         Self {
-            work_duration: Duration::from_secs(25 * 60),
-            short_break_duration: Duration::from_secs(5 * 60),
-            long_break_duration: Duration::from_secs(15 * 60),
-            sessions_before_long_break: 4,
+            work_duration: Duration::from_secs((5) as u64),
+            short_break_duration: Duration::from_secs((10) as u64),
+            long_break_duration: Duration::from_secs((20) as u64),
+            sessions_before_long_break: 1,
         }
     }
 }

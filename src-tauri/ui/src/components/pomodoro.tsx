@@ -1,10 +1,11 @@
 import { listen } from '@tauri-apps/api/event'
 import { invoke } from '@tauri-apps/api/core'
 import { useEffect, useState } from 'react'
+import './pomodoro.css'  // Make sure this is imported
 
 interface TimerUpdate {
-  state?: { type: string; value?: unknown }; // Rust enum with tag and value
-  remaining?: number; // seconds remaining
+  state?: { type: string; value?: unknown }; 
+  remaining?: number;
   completed_sessions?: number;
   total_sessions?: number;
 }
@@ -48,6 +49,10 @@ function PomodoroComponent() {
   const isRunning = latestUpdate?.state?.type === 'Working' || 
                     latestUpdate?.state?.type === 'ShortBreak' || 
                     latestUpdate?.state?.type === 'LongBreak';
+  
+  // Check if this is a break state
+  const isBreak = latestUpdate?.state?.type === 'ShortBreak' || 
+                  latestUpdate?.state?.type === 'LongBreak';
 
   // Format remaining time as MM:SS
   const formatTime = (seconds?: number) => {
@@ -75,8 +80,15 @@ function PomodoroComponent() {
         <h2>{getSessionType(latestUpdate?.state)}</h2>
         <div className="time">{formatTime(latestUpdate?.remaining)}</div>
         <div className="sessions">
-          Session {latestUpdate?.completed_sessions ?? 0}/{latestUpdate?.total_sessions ?? 4}
+          Session {latestUpdate?.completed_sessions ?? 0}
         </div>
+        
+        {isBreak && (
+          <div className="break-message">
+            <h3>Time to rest!</h3>
+            <p>Take a moment to relax and recharge.</p>
+          </div>
+        )}
       </div>
       
       <div className="controls">
